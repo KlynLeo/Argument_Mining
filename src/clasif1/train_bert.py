@@ -59,7 +59,7 @@ def main():
         args=args,
         train_dataset=train_ds,
         eval_dataset=val_ds,
-        processing_class=tokenizer,
+        tokenizer=tokenizer,
         data_collator=DataCollatorWithPadding(tokenizer=tokenizer),
         compute_metrics=eval_utils.compute_metrics_for_trainer,
     )

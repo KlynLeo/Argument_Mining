@@ -2,7 +2,7 @@ text,label,annotation,topic,predicted_label
 Orice astfel de material este transportat în containere concepute pentru a asigura siguranța în orice circumstanță.,1,Argument_for,nuclear energy,1
 "Costul uraniului, care este folosit ca combustibil în acest proces, este scăzut.",1,Argument_for,nuclear energy,1
 Bine că greenpeace nu are nicio influență acolo pentru a preveni cea mai curată și mai sigură energie dintre toate.,1,Argument_for,nuclear energy,0
-"Deci, desigur, primele avioane au avut greșeli de construcție și s-au prăbușit, dar am învățat și am construit avioane mai bune.",1,Argument_for,nuclear energy,1
+"Deci, desigur, primele avioane au avut greșeli de construcție și s-au prăbușit, dar am învățat și am construit avioane mai bune.",1,Argument_for,nuclear energy,0
 "Hidroul şi gazul lichefiat sunt cei mai mari ucigaşi, chiar înaintea cărbunelui, dar le pasă ecologiştilor?",1,Argument_for,nuclear energy,0
 Acoperirea extinsă a unor astfel de accidente a fost puternic distorsionată de mass-media și distorsionată și mai mult de către populația ignorantă care le-a crezut.,1,Argument_for,nuclear energy,1
 Cum rămâne cu toate emisiile de CO2 create de fabricarea și asamblarea parcurilor eoliene sau a instalațiilor de energie solară?,1,Argument_for,nuclear energy,1
@@ -69,7 +69,7 @@ Cred că ar trebui să te educi cu privire la subiect și apoi să revii la asta
 Aceștia erau oamenii care aveau slujba mea.,0,NoArgument,minimum wage,0
 "Tot ce trebuie să faci este să citești și să cercetezi pentru a ști asta, deoarece informațiile sunt peste tot.",0,NoArgument,minimum wage,0
 "Noua noastră resursă arată nivelurile salariului minim din toate cele 50 de state și DC, plus cele 37 de orașe și județe care și-au stabilit propriile tarife.",0,NoArgument,minimum wage,0
-"De regulă, dacă, mai puțini oameni renunță, atunci mai mulți bani pentru ei.",0,NoArgument,minimum wage,1
+"De regulă, dacă, mai puțini oameni renunță, atunci mai mulți bani pentru ei.",0,NoArgument,minimum wage,0
 Această coloană îi privește pe cei care se opun.,0,NoArgument,minimum wage,0
 "Problema mea cu asta este că mulți americani caută pe cineva care să sune bine și să-i facă să se simtă bine, apoi votează orice părere a acelei persoane despre o problemă.",0,NoArgument,minimum wage,0
 "De fapt, o modalitate de a privi acest lucru este că legile privind salariul minim scăzut sunt subvenții guvernamentale pentru întreprinderile cu salarii mici.",0,NoArgument,minimum wage,1
@@ -86,7 +86,7 @@ Un studiu evaluat de colegi din 2012 a constatat că 54 % dintre elevii de clasa
 "Avem un stil de uniforme pentru fete care este mai confortabil, practic și mai potrivit pentru forma unei fete.",1,Argument_for,school uniforms,0
 Uniformele pot fi refolosite și reciclate.,1,Argument_for,school uniforms,1
 "Analiza ei finală a surprins-o: „Am intrat într-adevăr în această gândire că uniformele nu fac diferență, dar am plecat văzând că da.",1,Argument_for,school uniforms,1
-Purtarea cămășii sau a pantalonilor la alegerea proprie nu este „discursul pur” protejat de Constituție.,1,Argument_for,school uniforms,1
+Purtarea cămășii sau a pantalonilor la alegerea proprie nu este „discursul pur” protejat de Constituție.,1,Argument_for,school uniforms,0
 "Specialistul în dezvoltare pentru copii și adolescenți, Robyn Silverman, a declarat astăzi pentru NBC News că studenții, în special fetele, au tendința de a compara cum arată unul pe altul în uniforme: „Ca expert în imaginea corporală, aud tot timpul de la studenți că simt că acest lucru permite o mulțime de comparații... Deci, dacă ai un corp care este un corp de mărime plus, un corp mai curbat, un corp de fete foarte înalt, nu se simte foarte des înalt. cel mai bun.",1,Argument_against,school uniforms,0
 Știi că ești adult atunci când ți se oferă libertatea de a alege – dacă îți place asta sau asta.,1,Argument_against,school uniforms,0
 "În orice alt domeniu al vieții, nu am visa să le spunem fetelor că trebuie să poarte o fustă.",1,Argument_against,school uniforms,1
@@ -107,6 +107,6 @@ Se pare că există o ruptură mare între susținătorii uniformelor școlare �
 "ProCon.org nu are control asupra conținutului acestor comentarii și, prin urmare, nu ne asumăm nicio responsabilitate pentru ele.",0,NoArgument,school uniforms,0
 este posibil cel mai comun argument împotriva uniformelor școlare .,0,NoArgument,school uniforms,1
 "În unele instituţii, uniformele sunt schimbate atunci când elevii trec la gimnaziu, liceu sau liceu.",0,NoArgument,school uniforms,1
-"Consiliul şcolii a făcut regula în mijlocul zilei, în plină iarnă.",0,NoArgument,school uniforms,1
-"Prin urmare , o astfel de politică nu ar trebui discutată ca o creştere a atmosferei educaţionale la orice nivel de şcolarizare .",0,NoArgument,school uniforms,1
+"Consiliul şcolii a făcut regula în mijlocul zilei, în plină iarnă.",0,NoArgument,school uniforms,0
+"Prin urmare , o astfel de politică nu ar trebui discutată ca o creştere a atmosferei educaţionale la orice nivel de şcolarizare .",0,NoArgument,school uniforms,0
 "Potrivit unui raport din 2013 al Departamentului de Justiție al SUA, aproape 50% dintre elevii de liceu spun că sunt membri ai bandelor în școlile lor.",0,NoArgument,school uniforms,1
