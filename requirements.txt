@@ -1,0 +1,16 @@
+deep-translator
+accelerate
+datasets
+joblib
+matplotlib
+networkx
+numpy
+pandas
+pyvis
+pytest
+scikit-learn
+sentence-transformers
+statsmodels
+streamlit
+torch
+transformers

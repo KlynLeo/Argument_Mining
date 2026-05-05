@@ -1,0 +1,164 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 900px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#f44336", "font": {"color": "#222222"}, "id": 0, "label": "0", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eOrice astfel de material este transportat \u00een containere concepute pentru a asigura siguran\u021ba \u00een orice circumstan\u021b\u0103."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 1, "label": "1", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eCostul uraniului, care este folosit ca combustibil \u00een acest proces, este sc\u0103zut."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 2, "label": "2", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eAcoperirea extins\u0103 a unor astfel de accidente a fost puternic distorsionat\u0103 de mass-media \u0219i distorsionat\u0103 \u0219i mai mult de c\u0103tre popula\u021bia ignorant\u0103 care le-a crezut."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 3, "label": "3", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eCum r\u0103m\u00e2ne cu toate emisiile de CO2 create de fabricarea \u0219i asamblarea parcurilor eoliene sau a instala\u021biilor de energie solar\u0103?"}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 4, "label": "4", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eDe asemenea , dac\u0103 \u0219tim s\u0103 control\u0103m fuziunea atomic\u0103 , acelea\u0219i reac\u021bii care alimenteaz\u0103 soarele , putem avea energie aproape nelimitat\u0103 ."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 5, "label": "5", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eDe\u0219eurile sunt con\u021binute \u0219i gestionate, nu eliberate."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 6, "label": "6", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eCantitatea de combustibil necesar\u0103 unei centrale nucleare este comparativ mai mic\u0103 dec\u00e2t cea cerut\u0103 de alte centrale electrice, deoarece energia eliberat\u0103 de fisiunea nuclear\u0103 este de aproximativ zece milioane de ori mai mare dec\u00e2t cantitatea de energie eliberat\u0103 de atomul de combustibil fosil."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 7, "label": "7", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003e\u201e\u021aint\u0103 pentru terorism\u201d Acest lucru se aplic\u0103 \u0219i altor lucruri precum hidrocentralele, dar microcentralele moderne pot fi subterane, astfel \u00eenc\u00e2t nici m\u0103car un accident de avion s\u0103 nu d\u0103uneze reactorului."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 8, "label": "8", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003ePentru c\u0103 ei \u0219tiu c\u0103, dac\u0103 reciclezi barele de combustibil, nu ai o problem\u0103 cu de\u0219eurile \u0219i pierd argumentul \u00eempotriva nuclearului."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 9, "label": "9", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003ePrin urmare, sunt necesare solu\u021bii costisitoare pentru a proteja Mama P\u0103m\u00e2nt de efectele devastatoare ale energiei nucleare."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 10, "label": "10", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eReprocesarea combustibilului uzat d\u0103 na\u0219tere la plutoniu care este probabil s\u0103 fie folosit \u00een bombe."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 11, "label": "11", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eR\u0103cirea acestor opera\u021biuni necesit\u0103 adesea o mul\u021bime de ap\u0103, a c\u0103rei extragere \u0219i eliberare pot afecta fauna acvatic\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 12, "label": "12", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eDe\u0219i nicio tehnologie nu poate fi perfect sigur\u0103, energia nuclear\u0103 este o tehnologie \u00een mod inerent riscant\u0103, iar reducerea la minimum a riscurilor necesit\u0103 standarde \u0219i practici stricte de siguran\u021b\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 13, "label": "13", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eNu putem fi siguri c\u0103 uraniul nostru nu ajunge \u00een arme, de exemplu \u00een Fran\u021ba sau China."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 14, "label": "14", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eSingura solu\u021bie este oprirea expansiunii \u00eentregii energie nuclear\u0103 \u0219i \u00eenchiderea centralelor existente."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 15, "label": "15", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eIndustria nuclear\u0103 \u0219i cei care pretind s\u0103 o reglementeze au minimizat poten\u021bialul unui astfel de accident."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 16, "label": "16", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eEnergia nuclear\u0103 este prea scump\u0103, eficien\u021ba energetic\u0103 este tot ceea ce este necesar, cu o utilizare mai mare a surselor regenerabile."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 17, "label": "17", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eDar, dup\u0103 cum a remarcat Michael Grunwald \u00een Time, estim\u0103rile recente ale pre\u021burilor pentru o fabric\u0103 mare din Florida au fost de la 12 la 18 miliarde de dolari, \u0219i asta \u00eenainte de a lua \u00een considerare faptul c\u0103 industria nuclear\u0103 are o istorie de dep\u0103\u0219iri de 250% a costurilor. Unii anali\u0219ti spun c\u0103 metodele alternative ar aduce mult mai mult profit pentru economisirea climei dec\u00e2t energia nuclear\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 18, "label": "18", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eCu toate acestea, exploatarea centralelor nucleare mai mult dec\u00e2t a fost planificat ini\u021bial poate fi destul de periculoas\u0103, deoarece orice instala\u021bie sau aparat tehnic devine de obicei mai sup\u0103r\u0103toare spre sf\u00e2r\u0219itul speran\u021bei de via\u021b\u0103 planificate."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 19, "label": "19", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003e\u00cen calitate de lideri mondiali, pute\u021bi lucra \u00eempreun\u0103 pentru a \u00eenlocui aceast\u0103 cantitate mic\u0103 de energie din alte surse de energie u\u0219or disponibile, foarte sigure \u0219i accesibile, pentru a ne \u00eendrepta c\u0103tre un viitor f\u0103r\u0103 carbon \u0219i f\u0103r\u0103 nucleare. \u201d"}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 20, "label": "20", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: nuclear energy\u003cbr\u003eMajoritatea uraniului cunoscut din \u00eentreaga lume se afl\u0103 sub p\u0103m\u00e2nt controlat de triburi sau popoare indigene care nu sus\u021bin ca acesta s\u0103 fie extras din p\u0103m\u00e2nt."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 21, "label": "21", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eUn raport din 2015 al Alian\u021bei pentru o Societate Just\u0103, a constatat c\u0103 \u201esalariul minim federal de 7,25 dolari pe or\u0103 reprezint\u0103 mai pu\u021bin de jum\u0103tate din salariul de trai pentru un singur adult\u201d, iar un muncitor care se \u00eentre\u021bine numai pe sine ar trebui s\u0103 lucreze 93 de ore pe s\u0103pt\u0103m\u00e2n\u0103 la salariul minim federal pentru a-\u0219i face rostul \u201esau s\u0103 sar\u0103 peste nevoi precum mese sau medicamente\u201d."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 22, "label": "22", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003e\u00cen 2012, cel mai bogat 1% din popula\u021bia SUA a c\u00e2\u0219tigat 22,83% din venitul total \u00eenainte de impozitare al na\u021biunii, rezult\u00e2nd cel mai mare decalaj dintre boga\u021bi \u0219i s\u0103raci din anii 1920."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 23, "label": "23", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eEste un mit c\u0103 salariul minim este doar pentru adolescen\u021bi \u0219i pentru lucr\u0103torii de nivel \u00eencep\u0103tor."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 24, "label": "24", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eCercet\u0103rile sugereaz\u0103 c\u0103 o cre\u0219tere a salariului minim ar putea avea un mic efect stimulativ asupra economiei, deoarece lucr\u0103torii cu salarii mici \u00ee\u0219i cheltuiesc veniturile suplimentare, cresc\u00e2nd cererea \u0219i cre\u0219terea locurilor de munc\u0103 \u0219i oferind ajutor \u00een ceea ce prive\u0219te locurile de munc\u0103. \""}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 25, "label": "25", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eAdolescen\u021bii care tr\u0103iesc \u00een s\u0103r\u0103cie au de dou\u0103 ori mai multe \u0219anse s\u0103 rateze trei sau mai multe zile de \u0219coal\u0103 pe lun\u0103 \u00een compara\u021bie cu cei care nu o fac; astfel, cre\u0219terea salariului minim \u0219i scoaterea familiilor din s\u0103r\u0103cie ar \u00eensemna c\u0103 copiii vor lipsi mai pu\u021bine zile de \u0219coal\u0103."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 26, "label": "26", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eMit: Cre\u0219terea salariului minim cu bac\u0219i\u0219 federal (2,13 dolari pe or\u0103 din 1991) ar d\u0103una restaurantelor."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 27, "label": "27", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eCu toate acestea, \u00een apelul s\u0103u de a cre\u0219te treptat minimul federal actual, pre\u0219edintele Obama a cerut \u0219i ca acesta s\u0103 se ajusteze automat cu infla\u021bia."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 28, "label": "28", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003ePotrivit James K. Galbraith, PhD, profesor de guvernare la Universitatea Texas din Austin, \u201e[b] deoarece veniturile din salarii \u0219i impozitele pe venit ar cre\u0219te [ca urmare a unei cre\u0219teri a salariului minim], deficitul federal ar sc\u0103dea.\u201d"}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 29, "label": "29", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eO cre\u0219tere a salariului minim va pune mai mul\u021bi bani \u00een buzunarele mai multor familii, care vor fi cheltui\u021bi pe bunuri \u0219i servicii, stimul\u00e2nd cre\u0219terea economic\u0103 la nivel local \u0219i na\u021bional."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 30, "label": "30", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eSondajele efectuate din februarie 2013, c\u00e2nd pre\u0219edintele Obama a cerut pentru prima dat\u0103 Congresului s\u0103 majoreze salariul minim, au ar\u0103tat \u00een mod constant c\u0103 o majoritate cov\u00e2r\u0219itoare a americanilor sus\u021bin o cre\u0219tere."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 31, "label": "31", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eCre\u0219terea salariului minim federal este o parte important\u0103 a consolid\u0103rii economiei."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 32, "label": "32", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eDeoarece firmelor li se permite s\u0103 pl\u0103teasc\u0103 salarii la nivelul s\u0103r\u0103ciei pentru 3,6 milioane de oameni -- 5% din for\u021ba de munc\u0103 -- ace\u0219ti lucr\u0103tori trebuie s\u0103 se bazeze pe programele federale de sprijinire a veniturilor."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 33, "label": "33", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eAdev\u0103rul este c\u0103 legile privind salariul minim blocheaz\u0103 tinerii de pe pia\u021ba muncii."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 34, "label": "34", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eThomas Grennes , MA , profesor emerit la Universitatea de Stat din Carolina de Nord , \u0219i Andris Strazds , MSc , lector la Stockholm School of Economics din Riga ( Letonia ) , au declarat: \u201eefectul net al salariilor minime mai mari ar fi nefavorabil pentru gospod\u0103riile s\u0103race, chiar dac\u0103 nu exist\u0103 pierderi de locuri de munc\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 35, "label": "35", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eDe ce s\u0103 arunci mai mul\u021bi bani \u00een cineva care se mul\u021bume\u0219te s\u0103 r\u0103m\u00e2n\u0103 pe loc."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 36, "label": "36", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eMit: Cre\u0219terea salariului minim cu bac\u0219i\u0219 federal (2,13 dolari pe or\u0103 din 1991) ar duce la pierderea locurilor de munc\u0103 \u00een restaurante."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 37, "label": "37", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eDesigur, acest lucru nu \u00eenseamn\u0103 c\u0103 cre\u0219terea salariului minim nu ar fi foarte benefic\u0103 pentru cei care \u00eel c\u00e2\u0219tig\u0103, dar, \u00een cele din urm\u0103, nu \u00eei ajut\u0103 pe cei care nu au deja un loc de munc\u0103 pentru \u00eenceput."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 38, "label": "38", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eConcuren\u021ba se va intensifica: dac\u0103 salariul minim cre\u0219te, persoanele prea calificate vor lupta pentru pozi\u021bii cu salariul minim, \u00eemping\u00e2nd lucr\u0103torii mai tineri \u0219i f\u0103r\u0103 experien\u021b\u0103 din competi\u021bie \u0219i r\u0103pindu-le oportunitatea de a c\u00e2\u0219tiga experien\u021b\u0103 \u0219i cuno\u0219tin\u021be pentru a-\u0219i construi un CV \u0219i a intra \u00een for\u021ba de munc\u0103."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 39, "label": "39", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eNBC News a descoperit c\u0103 pre\u021bul unei ce\u0219ti de cafea a crescut cu 10 p\u00e2n\u0103 la 20% \u00een Oakland, California, dup\u0103 o cre\u0219tere a salariului minim de 36% \u00een ora\u0219, la 12,25 dolari."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 40, "label": "40", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eJames Dorn, PhD, Senior Fellow la Institutul Cato, a declarat c\u0103 o cre\u0219tere cu 10% a salariului minim \u201econduce la o sc\u0103dere cu 1 p\u00e2n\u0103 la 3% a angaj\u0103rii lucr\u0103torilor slab califica\u021bi\u201d pe termen scurt \u0219i \u201ela o sc\u0103dere mai mare pe termen lung\u201d."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 41, "label": "41", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eMai pu\u021bine angaj\u0103ri: dac\u0103 afacerile trebuie s\u0103 pl\u0103teasc\u0103 salariul minim mai mult angaja\u021bilor, nu \u00ee\u0219i pot permite s\u0103 angajeze at\u00e2t de mul\u021bi angaja\u021bi."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 42, "label": "42", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eCre\u0219terea salariului minim federal ar d\u0103una \u00een mod dispropor\u021bionat celor mai s\u0103race zone ale Statelor Unite."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 43, "label": "43", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eUnii angaja\u021bi ai organiza\u021biei nonprofit din zona Seattle, Full Life Care, au cerut o reducere a orelor dup\u0103 ce a fost majorat salariul minim, invoc\u00e2nd \u00eengrijorarea c\u0103 cre\u0219terea va \u00eensemna c\u0103 \u00ee\u0219i vor pierde subven\u021biile pentru locuin\u021be, dar \u00eenc\u0103 nu \u00ee\u0219i pot permite chirii la pre\u021bul pie\u021bei."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 44, "label": "44", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: minimum wage\u003cbr\u003eNu este adev\u0103rat: muncitorul obi\u0219nuit cu salariul minim nu este un elev de liceu care c\u00e2\u0219tig\u0103 bani de buzunar \u00een weekend."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 45, "label": "45", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eVirginia B. Draa, profesor asistent de Ecologie Uman\u0103 la Universitatea de Stat din Youngstown, a spus c\u0103 uniformele pot sc\u0103dea presiunea colegilor \u0219i pot estompa liniile de curs \u00eentre studen\u021bi."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 46, "label": "46", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUniformele \u0219colare pot economisi bani pentru p\u0103rin\u021bi."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 47, "label": "47", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUniformele \u00eencurajeaz\u0103 \u0219i reflect\u0103 asem\u0103narea."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 48, "label": "48", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eMajoritatea p\u0103rin\u021bilor \u0219i educatorilor sus\u021bin uniformele \u0219colare obligatorii."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 49, "label": "49", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUniformele \u0219colare pot \u00eembun\u0103t\u0103\u021bi prezen\u021ba \u0219i disciplina."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 50, "label": "50", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUn studiu din 2007, evaluat de colegi, a constatat c\u0103, dup\u0103 introducerea uniformelor, \u201eProfesorii au perceput o cre\u0219tere a nivelului de respect, grij\u0103 \u0219i \u00eencredere... \u00een \u00eentreaga \u0219coal\u0103\u201d \u0219i au spus c\u0103 \u201eelevii sunt f\u0103cu\u021bi s\u0103 se simt\u0103 \u201eimportan\u021bi\u201d \u0219i ca \u0219i cum ar fi parte dintr-o echip\u0103 purt\u00e2nd o uniform\u0103\u201d."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 51, "label": "51", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUn studiu evaluat de colegi din 2012 a constatat c\u0103 54 % dintre elevii de clasa a VIII-a au spus c\u0103 \u00ee\u0219i pot exprima \u00een continuare individualitatea purt\u00e2nd uniforme \u0219colare."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 52, "label": "52", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUniformele pot fi refolosite \u0219i reciclate."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 53, "label": "53", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eAnaliza ei final\u0103 a surprins-o: \u201eAm intrat \u00eentr-adev\u0103r \u00een aceast\u0103 g\u00e2ndire c\u0103 uniformele nu fac diferen\u021b\u0103, dar am plecat v\u0103z\u00e2nd c\u0103 da."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 54, "label": "54", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003e\u00cen orice alt domeniu al vie\u021bii, nu am visa s\u0103 le spunem fetelor c\u0103 trebuie s\u0103 poarte o fust\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 55, "label": "55", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eAt\u00e2ta timp c\u00e2t aceast\u0103 parad\u0103 a alegerilor nu \u00eentrerupe ziua de \u0219coal\u0103, \u0219colile ar trebui s\u0103 fie interesate s\u0103 cultive, mai degrab\u0103 dec\u00e2t s\u0103 standardizeze, expresia elevilor."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 56, "label": "56", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003e\u00cembun\u0103t\u0103\u021biri mai substan\u021biale ale educa\u021biei publice ar putea fi realizate cu clase mai mici, securitate sporit\u0103, implicare sporit\u0103 a p\u0103rin\u021bilor, facilit\u0103\u021bi \u00eembun\u0103t\u0103\u021bite \u0219i alte m\u0103suri."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 57, "label": "57", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eS\u0103 ne imagin\u0103m c\u0103 a le spune studen\u021bilor ce s\u0103 poarte va aduce \u00eenapoi acele zile \u00eenseamn\u0103 s\u0103 ne angaj\u0103m \u00eentr-o g\u00e2ndire plin\u0103 de iluzii, dac\u0103 nu neclare... Dac\u0103 dorim ca studen\u021bii s\u0103 devin\u0103 g\u00e2nditori critici \u0219i oameni etici, atunci trebuie s\u0103 \u021bintim mai mult dec\u00e2t simpla conformare."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 58, "label": "58", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eO carte din 2004 sus\u021bine c\u0103 uniformele nu \u00eembun\u0103t\u0103\u021besc siguran\u021ba \u0219colii sau disciplina academic\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 59, "label": "59", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eDe\u0219i nu este evident, uniformele alimenteaz\u0103 interese comerciale r\u0103ut\u0103cioase \u0219i ar trebui oprite \u00eenainte de a se pierde mai mul\u021bi bani irositi."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 60, "label": "60", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eBrunsma a concluzionat c\u0103 nu exist\u0103 o corela\u021bie pozitiv\u0103 \u00eentre uniforme \u0219i siguran\u021ba \u0219colar\u0103 sau performan\u021ba \u0219colar\u0103."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 61, "label": "61", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003e\u0218colile petrec at\u00e2t de mult timp \u00eencerc\u00e2nd s\u0103-\u0219i \u021bin\u0103 elevii sub control, \u00eenc\u00e2t ajung s\u0103 zdrobeasc\u0103 sc\u00e2nteile cu care s-au n\u0103scut unii dintre ace\u0219ti copii... Uniformele pun \u00een pericol capacitatea tinerilor Americii de a se exprima, de a deveni oamenii care \u00ee\u0219i doresc s\u0103 fie."}, {"color": "#f44336", "font": {"color": "#222222"}, "id": 62, "label": "62", "shape": "dot", "title": "\u003cb\u003eCONTRA\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUniformele \u0219colare de ast\u0103zi par mai degrab\u0103 o m\u0103sur\u0103 punitiv\u0103 menit\u0103 s\u0103 le refuze elevilor dreptul la libertatea de exprimare \u0219i la individualitate."}, {"color": "#4caf50", "font": {"color": "#222222"}, "id": 63, "label": "63", "shape": "dot", "title": "\u003cb\u003ePRO\u003c/b\u003e\u003cbr\u003eTopic: school uniforms\u003cbr\u003eUniformele \u0219colare din \u0219colile publice submineaz\u0103 promisiunea unei educa\u021bii gratuite prin impunerea unei cheltuieli suplimentare familiilor."}]);
+                  edges = new vis.DataSet([{"color": "#2196f3", "from": 9, "title": "support (0.66)", "to": 12, "width": 2}, {"color": "#2196f3", "from": 12, "title": "support (0.75)", "to": 18, "width": 2}, {"color": "#2196f3", "from": 15, "title": "support (0.67)", "to": 18, "width": 2}, {"color": "#2196f3", "from": 23, "title": "support (0.78)", "to": 44, "width": 2}, {"color": "#2196f3", "from": 23, "title": "support (0.74)", "to": 33, "width": 2}, {"color": "#2196f3", "from": 23, "title": "support (0.66)", "to": 37, "width": 2}, {"color": "#ff9800", "from": 24, "title": "attack (0.81)", "to": 37, "width": 2}, {"color": "#ff9800", "from": 24, "title": "attack (0.77)", "to": 38, "width": 2}, {"color": "#2196f3", "from": 24, "title": "support (0.73)", "to": 29, "width": 2}, {"color": "#2196f3", "from": 24, "title": "support (0.70)", "to": 40, "width": 2}, {"color": "#ff9800", "from": 24, "title": "attack (0.68)", "to": 41, "width": 2}, {"color": "#2196f3", "from": 26, "title": "support (0.92)", "to": 36, "width": 2}, {"color": "#ff9800", "from": 28, "title": "attack (0.66)", "to": 42, "width": 2}, {"color": "#2196f3", "from": 29, "title": "support (0.70)", "to": 31, "width": 2}, {"color": "#2196f3", "from": 37, "title": "support (0.74)", "to": 44, "width": 2}, {"color": "#2196f3", "from": 37, "title": "support (0.73)", "to": 41, "width": 2}, {"color": "#2196f3", "from": 37, "title": "support (0.70)", "to": 38, "width": 2}, {"color": "#2196f3", "from": 41, "title": "support (0.66)", "to": 44, "width": 2}, {"color": "#2196f3", "from": 46, "title": "support (0.71)", "to": 48, "width": 2}, {"color": "#2196f3", "from": 46, "title": "support (0.66)", "to": 49, "width": 2}, {"color": "#2196f3", "from": 48, "title": "support (0.69)", "to": 49, "width": 2}, {"color": "#2196f3", "from": 49, "title": "support (0.67)", "to": 50, "width": 2}, {"color": "#2196f3", "from": 50, "title": "support (0.66)", "to": 51, "width": 2}, {"color": "#ff9800", "from": 58, "title": "attack (0.72)", "to": 60, "width": 2}, {"color": "#ff9800", "from": 58, "title": "attack (0.67)", "to": 62, "width": 2}, {"color": "#2196f3", "from": 61, "title": "support (0.73)", "to": 62, "width": 2}, {"color": "#ff9800", "from": 61, "title": "attack (0.69)", "to": 63, "width": 2}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "forceAtlas2Based": {
+            "avoidOverlap": 0,
+            "centralGravity": 0.01,
+            "damping": 0.4,
+            "gravitationalConstant": -50,
+            "springConstant": 0.08,
+            "springLength": 100
+        },
+        "solver": "forceAtlas2Based",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

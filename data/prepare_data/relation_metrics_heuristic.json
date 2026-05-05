@@ -1,0 +1,55 @@
+{
+  "labels": [
+    "support",
+    "attack",
+    "no_relation"
+  ],
+  "macro_f1": 1.0,
+  "support_attack_macro_f1": 1.0,
+  "per_label": {
+    "support": 1.0,
+    "attack": 1.0,
+    "no_relation": 1.0
+  },
+  "classification_report": {
+    "support": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 96.0
+    },
+    "attack": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 48.0
+    },
+    "no_relation": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 124.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 268.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 268.0
+    }
+  },
+  "num_pairs": 1072,
+  "num_train": 804,
+  "num_test": 268,
+  "label_distribution": {
+    "no_relation": 495,
+    "support": 385,
+    "attack": 192
+  }
+}
