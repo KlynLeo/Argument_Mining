@@ -1,0 +1,12 @@
+
+models/
+update-latest-version/
+ 
+__pycache__/
+*.pyc
+.cache/
+ 
+.ipynb_checkpoints/
+ 
+*.log
+.venv/

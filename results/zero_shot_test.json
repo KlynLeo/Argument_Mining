@@ -1,0 +1,21 @@
+{
+  "accuracy": 0.6396396396396397,
+  "precision_pos": 0.6767676767676768,
+  "recall_pos": 0.8933333333333333,
+  "f1_pos": 0.7701149425287357,
+  "precision_macro": 0.5050505050505051,
+  "recall_macro": 0.5022222222222222,
+  "f1_macro": 0.46839080459770116,
+  "n_samples": 111,
+  "confusion_matrix": [
+    [
+      4,
+      32
+    ],
+    [
+      8,
+      67
+    ]
+  ],
+  "classification_report": "                   precision    recall  f1-score   support\n\nnon-argumentative     0.3333    0.1111    0.1667        36\n    argumentative     0.6768    0.8933    0.7701        75\n\n         accuracy                         0.6396       111\n        macro avg     0.5051    0.5022    0.4684       111\n     weighted avg     0.5654    0.6396    0.5744       111\n"
+}

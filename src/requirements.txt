@@ -1,0 +1,8 @@
+transformers==4.41.0
+tensorflow==2.10.1
+torch
+numpy<2
+pandas==2.1.0
+datasets==3.2.0
+scikit-learn==1.2.2
+accelerate>=0.21.0

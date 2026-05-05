@@ -18,14 +18,31 @@ Accepted `stance_pred` values include `pro`, `contra`, `neutral`, `neutru`.
 
 ## Step 1: Generate candidate pairs and the baseline graph
 
+If Tudor and Diana already exported their result files, first merge them into the graph input format:
+
+```powershell
+python data\prepare_data\integrate_predictions.py `
+  --argument-input results\finetuned_predictions.csv `
+  --stance-input results\finetuned_predictions_clasif2.csv `
+  --output results\pipeline_predictions_for_graph.csv
+```
+
+This converts:
+
+- Tudor/classifier 1: `predicted_label` 0/1 -> `argument_pred` no/argument;
+- Diana/classifier 2: `predicted_label` 0/1 -> `stance_pred` pro/contra;
+- missing stance predictions -> `neutral`.
+
+Then build the graph from the merged file:
+
 ```powershell
 python data\prepare_data\argument_graph.py `
-  --input predictions.csv `
+  --input results\pipeline_predictions_for_graph.csv `
   --argument-col argument_pred `
   --stance-col stance_pred `
   --include-no-relation `
-  --output-pairs data\prepare_data\argument_pairs.csv `
-  --output-edges data\prepare_data\argument_edges.csv
+  --output-pairs results\pipeline_argument_pairs.csv `
+  --output-edges results\pipeline_argument_edges.csv
 ```
 
 What this does:
